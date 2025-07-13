@@ -2,33 +2,36 @@ let num1 = "";
 let num2 = "";
 let result = 0;
 let input = "";
-let num = 0;
 let operator = "";
+console.log("hi")
 const container = document.querySelector(".container");
 const buttons = document.querySelectorAll("button");
 buttons.forEach(button => {
     button.addEventListener("click",(event)=>{
         input = event.target.id
         if(input != "add" && input != "subtract" && input != "divide" 
-            && input != "multiply" && input != "Enter" && input != "decimal" && input != "clear" ){
+            && input != "multiply" && input != "Enter" && input != "clear" ){
                 if(operator ===""){
                 num1 = num1 + input
+                console.log(num1)
                 }
-            
-        else{
-            num2 = num2 + input
-        }
-    }
-        if((input === "add" || input === "subtract" || input === "divide" 
-                || input === "multiply" || input === "decimal" || input === "clear") && num1 != ""){
+                else{
+                num2 = num2 + input
+                console.log(num2)
+                }
+            }
+        else if((input === "add" || input === "subtract" || input === "divide" 
+                || input === "multiply") && num1 != ""){
                 operator = input;         
                 }
-
-        if(num1 != "" && operator != "" && input != "Enter"){
-            num2 = num2 + input
+        else if(input === "clear"){
+            num1 = ""
+            num2 = ""
+            operator = ""
+            result = ""
+            input = ""
         }
-
-        else{
+        else if(input === "Enter" && operator!= "" && num1 != "" && num2 != ""){
             num1 = parseFloat(num1)
             num2 = parseFloat(num2)
             let total = operate(operator, num1, num2)
