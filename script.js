@@ -80,7 +80,7 @@ buttons.forEach(button => {
                 span.textContent = num1 +" "+ operator         
                 }
         else if(input === "negative"){
-            if(operator ===""){
+            if(operator ==="" && total === 0){
                 if(num1.includes("-") === false){
                     num1 = "-" + num1;
                     value.textContent = num1}
