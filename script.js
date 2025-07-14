@@ -14,7 +14,7 @@ buttons.forEach(button => {
     button.addEventListener("click",(event)=>{
         input = event.target.id
         if(input != "+" && input != "-" && input != "/" 
-            && input != "*" && input != "=" && input != "clear"){
+            && input != "X" && input != "=" && input != "clear"){
                 if(operator ===""){
                     if(input === "."){
                     for(let i =0; i<num1.length;i++){
@@ -69,9 +69,9 @@ buttons.forEach(button => {
                 }}         
             }}
         else if((input === "+" || input === "-" || input === "/" 
-                || input === "*") && num1 != ""){
+                || input === "X") && num1 != ""){
                 operator = input;
-                span.textContent = num1 + operator         
+                span.textContent = num1 +" "+ operator         
                 }
         else if(input === "clear"){
             num1 = "";
@@ -80,12 +80,13 @@ buttons.forEach(button => {
             input = "";
             operator = "";
             insertion = "";
+            span.textContent = ""
             decimal = false;
             decimal2 = false;
             value.textContent = 0
         }
         else if(input === "=" && operator!= "" && num1 != "" && num2 != ""){
-            span.textContent = num1 + operator + num2 + input;
+            span.textContent = num1 +" "+ operator + " "+ num2+" " + input;
             let number1 = parseFloat(num1)
             let number2 = parseFloat(num2)
             let total = operate(operator, number1, number2)
@@ -131,10 +132,10 @@ function multiply(num1,num2){
 
 function operate(func,num1,num2){
     switch(func){
-        case "add": return add(num1, num2)
-        case "subtract": return subtract(num1, num2)
-        case "divide": return divide(num1, num2)
-        case "multiply": return multiply(num1, num2)
+        case "+": return add(num1, num2)
+        case "-": return subtract(num1, num2)
+        case "/": return divide(num1, num2)
+        case "X": return multiply(num1, num2)
         default: return null
     }
 

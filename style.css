@@ -37,15 +37,19 @@ h1 {
     align-items: flex-end;
     justify-content: flex-end;
     padding-right: 20px;
-    overflow-wrap: normal;       /* doesn't matter in nowrap */
+    overflow-wrap: normal;     
 }
 
 #insertion{
     display:flex;
+    height: 2.5rem;
     width: 100%;
     justify-content: flex-end;
     background-color: bisque;
     font-size: 2rem;
+    padding-right: 20px;
+    padding-top: 10px;
+    box-sizing:border-box;
 }
 .grid {
     display: flex;
@@ -64,14 +68,14 @@ h1 {
     border: 2px solid black; 
 }
 
-#Enter{
+#\={
     background-color: orange;
 }
 
-#Enter:hover{
+#\=:hover{
     opacity: 90%;
 }
 
-#Enter:active{
+#\=:active{
     opacity: 75%;
 }
