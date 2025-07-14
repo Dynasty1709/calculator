@@ -14,6 +14,8 @@ const span = document.querySelector("span")
 buttons.forEach(button => {
     button.addEventListener("click",(event)=>{
         input = event.target.id
+        decimal = num1.includes(".");
+        decimal2 = num2.includes(".");
         if(input != "+" && input != "-" && input != "/" 
             && input != "X" && input != "=" && input != "clear" && input != "back"
             && input!="negative"){
@@ -32,7 +34,12 @@ buttons.forEach(button => {
                     }
                     if(decimal === false){
                         if(num1.length < 14){
+                            if(input!="." && num1 === "0"){
+                                num1 = input
+                            }
+                            else{
                             num1 = num1 + input}
+                        }
                         else{
                             alert("There are too many digits. Please only type in a number less than 14 digits")
                         }
@@ -40,7 +47,11 @@ buttons.forEach(button => {
                     }
                     else{
                         if(num1.length < 14){
-                            num1 = num1 + input}
+                            if(input!="." && num1 ==="0"){
+                                num1 = input
+                            }
+                            else{
+                            num1 = num1 + input}}
                         else{
                             alert("There are too many digits. Please only type in a number less than 14 digits")
                         }
@@ -67,8 +78,11 @@ buttons.forEach(button => {
                 }
                 else{
                     if(num2.length<14){
-                        num2 = num2 + input;
-                        value.textContent = num2;
+                        if(input !=="." && num2 ==="0"){
+                            num2 = input
+                        }
+                        else{num2 = num2 + input;
+                        value.textContent = num2;}
                     }
                 else{
                     alert("There are too many digits. Please only type in a number less than 14 digits")
@@ -115,15 +129,19 @@ buttons.forEach(button => {
             if(num1 !="" && num2 === ""&& total ===0 && operator === ""){
                 num1 = num1.slice(0,-1)
                 decimal = num1.includes(".")
-                value.textContent = num1
+                value.textContent = num1 || "0"
             }
             else if(num1 != "" && num2 !=""&& operator!=""){
                 num2 = num2.slice(0,-1);
                 decimal2 = num2.includes(".")
-                value.textContent = num2
+                value.textContent = num2 || "0"
             }
         }
         else if(input === "=" && operator!= "" && num1 != "" && num2 != ""){
+            if (num1 === "-" || num2 === "-") {
+                alert("Invalid number");
+                return;
+}
             span.textContent = num1 +" "+ operator + " "+ num2+" " + input;
             let number1 = parseFloat(num1)
             let number2 = parseFloat(num2)
@@ -148,7 +166,7 @@ buttons.forEach(button => {
 document.addEventListener("keydown", (event) => {
     let key = event.key;
 
-    const validKeys = ["0","1","2","3","4","5","6","7","8","9",".","+","-","/","*","Enter","Backspace","Escape"];
+    const validKeys = ["0","1","2","3","4","5","6","7","8","9",".","+","-","/","*","n","Enter","Backspace","Escape"];
 
     if (!validKeys.includes(key)) return;
 
@@ -156,6 +174,7 @@ document.addEventListener("keydown", (event) => {
     if (key === "Enter") key = "=";
     if (key === "Backspace") key = "back";
     if (key === "Escape") key = "clear";
+    if (key === "n") key = "negative";
 
     const button = document.getElementById(key);
     if (button) button.click();
