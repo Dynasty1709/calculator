@@ -1,25 +1,72 @@
 let num1 = "";
 let num2 = "";
-let result = 0;
+let result = "";
 let input = "";
 let operator = "";
 console.log("hi")
+let decimal = false;
+let decimal2 = false;
 const container = document.querySelector(".container");
 const buttons = document.querySelectorAll("button");
+const value = document.getElementById("input")
+
 buttons.forEach(button => {
     button.addEventListener("click",(event)=>{
         input = event.target.id
         if(input != "add" && input != "subtract" && input != "divide" 
             && input != "multiply" && input != "Enter" && input != "clear" ){
                 if(operator ===""){
-                num1 = num1 + input
-                console.log(num1)
+                    if(input === "."){
+                    for(let i =0; i<num1.length;i++){
+                        if(num1[i] === "."){
+                            decimal= true;
+                            break;
+                        }
+                    }
+                    if(decimal === false){
+                        if(num1.length < 14){
+                            num1 = num1 + input}
+                        else{
+                            alert("There are too many digits. Please only type in a number less than 14 digits")
+                        }
+                        }
+                    }
+                    else{
+                        if(num1.length < 14){
+                            num1 = num1 + input}
+                        else{
+                            alert("There are too many digits. Please only type in a number less than 14 digits")
+                        }
+                    }
+                value.textContent = num1
                 }
                 else{
-                num2 = num2 + input
-                console.log(num2)
+                    if(input === "."){
+                    for(let i =0; i<num2.length;i++){
+                        if(num2[i] === "."){
+                            decimal2= true;
+                            break;
+                        }
+                    }
+                    if(decimal2 === false){
+                        if(num2.length < 14){
+                            num2 = num2 + input
+                            value.textContent = num2}
+                        else{
+                            alert("There are too many digits. Please only type in a number less than 14 digits")
+                        }
+                        
+                    }
                 }
-            }
+                else{
+                    if(num2.length<14){
+                        num2 = num2 + input;
+                        value.textContent = num2;
+                    }
+                else{
+                    alert("There are too many digits. Please only type in a number less than 14 digits")
+                }}         
+            }}
         else if((input === "add" || input === "subtract" || input === "divide" 
                 || input === "multiply") && num1 != ""){
                 operator = input;         
@@ -30,12 +77,29 @@ buttons.forEach(button => {
             operator = ""
             result = ""
             input = ""
+            decimal = false;
+            decimal2 = false;
+            value.textContent = 0
         }
         else if(input === "Enter" && operator!= "" && num1 != "" && num2 != ""){
-            num1 = parseFloat(num1)
-            num2 = parseFloat(num2)
-            let total = operate(operator, num1, num2)
-            console.log(total)
+            let number1 = parseFloat(num1)
+            let number2 = parseFloat(num2)
+            let total = operate(operator, number1, number2)
+            result = total.toString()
+            if(result.length >10){
+                total = parseInt(total).toExponential(3)
+            }
+            value.textContent = total
+            if(total!=0){
+            num1 = total.toString()}
+            else{num1 = ""}
+            num2 = "";
+            total = 0;
+            decimal = num1.includes(".");
+            decimal2 = false;
+            operator = ""
+            input = ""
+            result = ""
         }      
     })
 })
@@ -49,7 +113,13 @@ function subtract(num1,num2){
 }
 
 function divide(num1,num2){
+    if(num2 === 0){
+        alert("You cannot divide by 0!")
+        return 0
+    }
+    else{
     return num1/num2
+    }
 }
 
 function multiply(num1,num2){
