@@ -4,6 +4,7 @@ let result = "";
 let input = "";
 let operator = "";
 let insertion = "";
+let total = 0;
 let decimal = false;
 let decimal2 = false;
 const container = document.querySelector(".container");
@@ -16,6 +17,10 @@ buttons.forEach(button => {
         if(input != "+" && input != "-" && input != "/" 
             && input != "X" && input != "=" && input != "clear"){
                 if(operator ===""){
+                    if(total !=0){
+                        num1 = "";
+                        total = 0;
+                    }
                     if(input === "."){
                     for(let i =0; i<num1.length;i++){
                         if(num1[i] === "."){
@@ -89,7 +94,7 @@ buttons.forEach(button => {
             span.textContent = num1 +" "+ operator + " "+ num2+" " + input;
             let number1 = parseFloat(num1)
             let number2 = parseFloat(num2)
-            let total = operate(operator, number1, number2)
+            total = operate(operator, number1, number2)
             result = total.toString()
             if(result.length >10){
                 total = parseInt(total).toExponential(3)
