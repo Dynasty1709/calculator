@@ -3,18 +3,18 @@ let num2 = "";
 let result = "";
 let input = "";
 let operator = "";
-console.log("hi")
+let insertion = "";
 let decimal = false;
 let decimal2 = false;
 const container = document.querySelector(".container");
 const buttons = document.querySelectorAll("button");
 const value = document.getElementById("input")
-
+const span = document.querySelector("span")
 buttons.forEach(button => {
     button.addEventListener("click",(event)=>{
         input = event.target.id
-        if(input != "add" && input != "subtract" && input != "divide" 
-            && input != "multiply" && input != "Enter" && input != "clear" ){
+        if(input != "+" && input != "-" && input != "/" 
+            && input != "*" && input != "=" && input != "clear"){
                 if(operator ===""){
                     if(input === "."){
                     for(let i =0; i<num1.length;i++){
@@ -41,6 +41,7 @@ buttons.forEach(button => {
                 value.textContent = num1
                 }
                 else{
+
                     if(input === "."){
                     for(let i =0; i<num2.length;i++){
                         if(num2[i] === "."){
@@ -67,21 +68,24 @@ buttons.forEach(button => {
                     alert("There are too many digits. Please only type in a number less than 14 digits")
                 }}         
             }}
-        else if((input === "add" || input === "subtract" || input === "divide" 
-                || input === "multiply") && num1 != ""){
-                operator = input;         
+        else if((input === "+" || input === "-" || input === "/" 
+                || input === "*") && num1 != ""){
+                operator = input;
+                span.textContent = num1 + operator         
                 }
         else if(input === "clear"){
-            num1 = ""
-            num2 = ""
-            operator = ""
-            result = ""
-            input = ""
+            num1 = "";
+            num2 = "";
+            result = "";
+            input = "";
+            operator = "";
+            insertion = "";
             decimal = false;
             decimal2 = false;
             value.textContent = 0
         }
-        else if(input === "Enter" && operator!= "" && num1 != "" && num2 != ""){
+        else if(input === "=" && operator!= "" && num1 != "" && num2 != ""){
+            span.textContent = num1 + operator + num2 + input;
             let number1 = parseFloat(num1)
             let number2 = parseFloat(num2)
             let total = operate(operator, number1, number2)
@@ -94,7 +98,6 @@ buttons.forEach(button => {
             num1 = total.toString()}
             else{num1 = ""}
             num2 = "";
-            total = 0;
             decimal = num1.includes(".");
             decimal2 = false;
             operator = ""

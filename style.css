@@ -40,6 +40,13 @@ h1 {
     overflow-wrap: normal;       /* doesn't matter in nowrap */
 }
 
+#insertion{
+    display:flex;
+    width: 100%;
+    justify-content: flex-end;
+    background-color: bisque;
+    font-size: 2rem;
+}
 .grid {
     display: flex;
     flex-wrap: wrap;
