@@ -15,11 +15,12 @@ buttons.forEach(button => {
     button.addEventListener("click",(event)=>{
         input = event.target.id
         if(input != "+" && input != "-" && input != "/" 
-            && input != "X" && input != "=" && input != "clear"){
+            && input != "X" && input != "=" && input != "clear" && input != "back"){
                 if(operator ===""){
                     if(total !=0){
                         num1 = "";
                         total = 0;
+                        span.textContent=num1
                     }
                     if(input === "."){
                     for(let i =0; i<num1.length;i++){
@@ -46,7 +47,6 @@ buttons.forEach(button => {
                 value.textContent = num1
                 }
                 else{
-
                     if(input === "."){
                     for(let i =0; i<num2.length;i++){
                         if(num2[i] === "."){
@@ -90,6 +90,18 @@ buttons.forEach(button => {
             decimal2 = false;
             value.textContent = 0
         }
+        else if(input === "back"){
+            if(num1 !="" && num2 === ""&& total ===0 && operator === ""){
+                num1 = num1.slice(0,-1)
+                decimal = num1.includes(".")
+                value.textContent = num1
+            }
+            else if(num1 != "" && num2 !=""&& operator!=""){
+                num2 = num2.slice(0,-1);
+                decimal2 = num2.includes(".")
+                value.textContent = num2
+            }
+        }
         else if(input === "=" && operator!= "" && num1 != "" && num2 != ""){
             span.textContent = num1 +" "+ operator + " "+ num2+" " + input;
             let number1 = parseFloat(num1)
@@ -97,7 +109,7 @@ buttons.forEach(button => {
             total = operate(operator, number1, number2)
             result = total.toString()
             if(result.length >10){
-                total = parseInt(total).toExponential(3)
+                total = Number(total).toExponential(3)
             }
             value.textContent = total
             if(total!=0){
